@@ -6,7 +6,7 @@ const Portafolio = () => {
     <section className="w-full flex flex-col items-center">
       <div className="w-full flex flex-col justify-center">
         <h1 className="font-bold text-3xl text-center pt-12 pb-12">Fotografía Profesional</h1>
-        <div className="grid grid-cols-4 justify-center gap-2 ml-6 mr-6">
+        <div className="grid grid-cols-4 justify-center gap-2 ml-12 mr-12">
             <Image
               width={600}
               height={300}
@@ -29,6 +29,12 @@ const Portafolio = () => {
               width={600}
               height={300}
               src="/images/jugador1.jpg"
+              alt="Paisaje"
+            />
+            <Image
+              width={600}
+              height={300}
+              src="/images/paisaje4.jpg"
               alt="Paisaje"
             />
         </div>
