@@ -39,11 +39,11 @@ const Navbar = () => {
       </nav>
 
       <div className="text-center">
-        <ul className="flex flex-row justify-center gap-x-4 font-semibold text-xl">
-          <Link href="/login" className="p-1 rounded-md border border-white">
+        <ul className="flex flex-row justify-center items-center gap-x-4 font-semibold text-xl">
+          <Link href="/login" className="p-1 hover:bg-[var(--primary)] transition-colors rounded ">
             <User />
           </Link>
-          <Link href="/carrito" className="p-1 rounded-md border border-white">
+          <Link href="/carrito" className="p-1 hover:bg-[var(--primary)] transition-colors rounded">
             <ShoppingCart />
           </Link>
         </ul>
