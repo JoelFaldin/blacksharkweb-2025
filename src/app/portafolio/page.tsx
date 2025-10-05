@@ -1,59 +1,65 @@
-import Image from 'next/image'
+"use client";
+import { useState } from "react";
+import Image from "next/image";
+import { motion, AnimatePresence } from "framer-motion";
+import { images } from "@/data/images";
 
-const Portafolio = () => {
+export default function Portafolio() {
+  const [filtro, setFiltro] = useState("Todo");
+
+  const categorias = ["Todo", "Fotografía Profesional", "Diseño Gráfico", "Servicios Extra"];
+
   return (
-      <>
-    <section className="w-full flex flex-col items-center">
-      <div className="w-full flex flex-col justify-center">
-        <h1 className="font-bold text-3xl text-center pt-12 pb-12">
-          Fotografía Profesional
-        </h1>
+    <section className="w-full flex flex-col items-center py-12">
+      {/* Título principal */}
+      <h1 className="font-bold text-3xl text-center pb-8">Portafolio</h1>
 
-        {/* Masonry layout con columnas fluidas */}
-        <div className="px-4 sm:px-8 md:px-12 columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-4 space-y-4">
-          {[
-            "/images/paisaje1.jpg",
-            "/images/paisaje2.jpg",
-            "/images/paisaje3.jpg",
-            "/images/jugador1.jpg",
-            "/images/paisaje4.jpg",
-            "/images/jugador2.jpg",
-            "/images/paisaje5.jpg",
-          ].map((src, i) => (
-            <div
-              key={i}
-              className="break-inside-avoid overflow-hidden shadow-md transition-transform duration-500 hover:scale-[1.02]"
-            >
-              <Image
-                src={src}
-                alt={`Foto ${i + 1}`}
-                width={800}
-                height={600}
-                className="w-full h-auto object-cover"
-              />
-            </div>
-          ))}
-        </div>
+      {/* 🔹 Navbar de filtros */}
+      <div className="flex flex-wrap justify-center gap-4 mb-10">
+        {categorias.map((cat) => (
+          <button
+            key={cat}
+            onClick={() => setFiltro(cat)}
+            className={`px-4 py-2 text-sm font-semibold transition-all duration-300 ${
+              filtro === cat
+                ? "bg-black text-white scale-105"
+                : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+            } rounded-full`}
+          >
+            {cat}
+          </button>
+        ))}
       </div>
-    </section>
 
-    <section className="w-full flex flex-col items-center">
-      <div className="h-96 w-full flex flex-col justify-center">
-        <h1 className="font-bold text-3xl text-center">
-          Diseño Gráfico
-        </h1>
-      </div>
+      {/* 🔹 Galería filtrada */}
+      <motion.div
+        layout
+        className="px-4 sm:px-8 md:px-12 columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-4 space-y-4"
+      >
+        <AnimatePresence>
+          {images
+            .filter((img) => filtro === "Todo" || img.categoria === filtro)
+            .map((img) => (
+              <motion.div
+                key={img.src}
+                layout
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.4 }}
+                className="break-inside-avoid overflow-hidden shadow-md hover:scale-[1.02] transition-transform duration-500"
+              >
+                <Image
+                  src={img.src}
+                  alt={img.alt}
+                  width={800}
+                  height={600}
+                  className="w-full h-auto object-cover"
+                />
+              </motion.div>
+            ))}
+        </AnimatePresence>
+      </motion.div>
     </section>
-
-    <section className="w-full flex flex-col items-center">
-      <div className="h-96 w-full flex flex-col justify-center">
-        <h1 className="font-bold text-3xl text-center">
-          Servicios Extra
-        </h1>
-      </div>
-    </section>
-    </>
-  )
+  );
 }
-
-export default Portafolio
