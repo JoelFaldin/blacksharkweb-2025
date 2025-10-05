@@ -11,8 +11,6 @@ export default function Portafolio() {
 
   return (
     <section className="w-full flex flex-col items-center py-12">
-      {/* Título principal */}
-      <h1 className="font-bold text-3xl text-center pb-8">Portafolio</h1>
 
       {/* 🔹 Navbar de filtros */}
       <div className="flex flex-wrap justify-center gap-4 mb-10">
@@ -20,18 +18,18 @@ export default function Portafolio() {
           <button
             key={cat}
             onClick={() => setFiltro(cat)}
-            className={`px-4 py-2 text-sm font-semibold transition-all duration-300 ${
+            className={`font-satoshi-bold px-4 py-2 text-sm font-semibold transition-all duration-300 cursor-pointer ${
               filtro === cat
                 ? "bg-black text-white scale-105"
                 : "bg-gray-200 text-gray-700 hover:bg-gray-300"
-            } rounded-full`}
+            } rounded-md`}
           >
             {cat}
           </button>
         ))}
       </div>
 
-      {/* 🔹 Galería filtrada */}
+      {/* Filtro de secciones */}
       <motion.div
         layout
         className="px-4 sm:px-8 md:px-12 columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-4 space-y-4"
